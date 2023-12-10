@@ -1,12 +1,48 @@
 Package: ReginalSPEI
-Title: What the Package Does (One Line, Title Case)
+Title: Calculate The Regional Standardised Precipitation Evapotranspiration Index 
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: c(
+  person(
+    given = "Gabriel Constantino",
+    family = "Blain",
+    role = c("aut", "cre"),
+    email = "gabriel.blain@sp.gov.br",
+    comment = c(ORCID = "0000-0001-8832-7734")
+  ),
+  person(
+    given = "Graciela R.",
+    family = "Sobierajski",
+    role = "aut",
+    comment = c(ORCID = "0000-0002-7211-9268")
+  ),
+  person(
+    given = "Leticia L.",
+    family = "Martins",
+    role = "aut",
+    comment = c(ORCID = "0000-0002-0299-3005")
+  ))
+Description: A set of functions designed to calculate 
+    the standardised precipitation evapotranspiration index
+    using the additional regional frequency analysis as described in
+    Martins et al. (2022) <doi:10.1590/1678-4499.20220061>.  
+    The functions calculate the discordance, heteronenity and, goodness of fit measures.
+    They also calculate the parameters of the regional distribution and
+    the cumulative probabilities.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Depends: 
+    R (>= 3.1.0)
+Imports:
+    MASS,
+    lmom,
+    lmomRFA,
+    rrcov,
+    stats
+LazyData: true
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+URL: https://github.com/gabrielblain/ReginalSPEI
+BugReports: https://github.com/gabrielblain/ReginalSPEI/issues
