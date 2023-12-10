@@ -1,4 +1,4 @@
-Package: ReginalSPEI
+Package: RegionalSPEI
 Title: Calculate The Regional Standardised Precipitation Evapotranspiration Index 
 Version: 0.0.0.9000
 Authors@R: c(
@@ -44,5 +44,5 @@ LazyData: true
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://github.com/gabrielblain/ReginalSPEI
-BugReports: https://github.com/gabrielblain/ReginalSPEI/issues
+URL: https://github.com/gabrielblain/RegionalSPEI
+BugReports: https://github.com/gabrielblain/RegionalSPEI/issues
