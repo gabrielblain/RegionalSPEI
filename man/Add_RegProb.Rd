@@ -11,7 +11,7 @@ Add_RegProb(dataset, distr, bestPar)
 The first column is the Years.
 The second column is the Months (from 1 to 12).
 The third column is the data coming from each site.
-See 'Dataset.csv' as example.}
+Use data(dataset) as example.}
 
 \item{distr}{A string indicating the regional distribution
 \dQuote{GEV} \dQuote{GLO} \dQuote{PE3}
@@ -30,5 +30,5 @@ Add_RegProb
 \examples{
 data(dataset)
 data(parGEV)
-Add_RegProb(dataset,distr="PE3",bestPar=parGEV)
+Add_RegProb(dataset,distr="GEV",bestPar=parGEV)
 }

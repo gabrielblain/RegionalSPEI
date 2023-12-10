@@ -1,0 +1,155 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# RegionalSPEI
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of RegionalSPEI is to calculate
+the standardised precipitation evapotranspiration index
+using the additional regional frequency analysis as described in
+Martins et al. (2022) <doi:10.1590/1678-4499.20220061>.
+The set of functions also calculate the discordance, heterogeneity and, goodness of fit measures. They also calculate the parameters of the regional distribution and
+the cumulative probabilities.
+
+## Installation
+
+You can install the development version of RegionalSPEI from [GitHub](https://github.com/gabrielblain/RegionalSPEI) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("gabrielblain/RegionalSPEI")
+```
+
+# Basic Instructions
+
+## Function Add_Discord()
+Calculates the Hosking and Wallis' discordance measure under the additional approach.
+
+## Usage
+```r
+Add_Discord(dataset)
+```
+## Arguments
+* dataset: A csv file with data from each sites. The first column is the Years. The second column is the Months (from 1 to 12). The third column is the data coming from
+each site. See ’dataset.csv’ as example.
+
+## Value
+
+Hosking and Wallis’ discordancy measure calculated using the additive approach as proposed in ’LOPES MARTINS et al. (2022)’ https://doi.org/10.1590/1678-4499.20220061
+
+## Examples
+data(dataset)
+Add_Discord(dataset)
+
+## Function Add_Heterogenety()
+Calculates the Hosking and Wallis' Heterogenety measure under the additional approach.
+
+## Usage
+```r
+Add_Heterogenety(dataset, rho = 0, Ns = 100)
+```
+## Arguments
+* dataset: A csv file with data from each sites. The first column is the Years. The second column is the Months (from 1 to 12). The third column is the data coming     from each site. See ’dataset.csv’ as example.
+* rho Average spatial correlation (between 0 and 1). defauld is 0.
+* Ns Number of simulated groups of series. Default is 100, but at least 500 is recommended.
+
+## Value
+’Hosking’ and ’Wallis” heterogeneity measure calculated using the additive approach proposed in ’LOPES MARTINS et al. (2022)’ https://doi.org/10.1590/1678-4499.20220061
+
+## Examples
+data(dataset)
+Add_Heterogenety(dataset,rho = 0.5,Ns = 100)
+
+## Function Add_GoodnessFit()
+Calculates the Hosking and Wallis' Goodness of fit measure and its bivariate extension as proposed by Kjeldsen and Prosdocimi (2015) 
+
+## Usage
+```r
+Add_GoodnessFit(dataset, rho = 0, Ns = 100)
+```
+## Arguments
+* dataset: A csv file with data from each sites. The first column is the Years. The second column is the Months (from 1 to 12). The third column is the data coming     from each site. See ’dataset.csv’ as example.
+* rho Average spatial correlation (between 0 and 1). defauld is 0.
+* Ns Number of simulated groups of series. Default is 100, but at least 500 is recommended.
+
+## Value
+Hosking and Wallis (1991) Goodness of fit measure and its bivatriate extension proposed in Kjeldsen and Prosdocimi (2015)
+
+## Examples
+data(dataset)
+Add_GoodnessFit(dataset,rho=0.5,Ns=100)
+
+## Function Add_RegPar()
+Calculates Regional parameter for several distributions.
+
+## Usage
+```r
+Add_RegPar(dataset)
+```
+## Arguments
+* dataset: A csv file with data from each sites. The first column is the Years. The second column is the Months (from 1 to 12). The third column is the data coming     from each site. See ’dataset.csv’ as example.
+
+## Value
+Regional parameter for several distributions within a homogeneous region or group.
+GEV: Generalized extreme value distribution.
+GLO: Generalized logistic distribution. 
+PE3: Pearson type III distribution. 
+GNO: Generalized normal distribution. GPA: Generalized pareto distribution.
+
+## Examples
+data(dataset)
+Add_RegPar(dataset)
+
+## Function Add_RegProb()
+Calculates cumulative probabilities.
+
+## Usage
+```r
+Add_RegPar(dataset)
+```
+## Arguments
+* dataset: A csv file with data from each sites. The first column is the Years. The second column is the Months (from 1 to 12). The third column is the data coming     from each site. See ’dataset.csv’ as example.
+* distr A string indicating the regional distribution “GEV” “GLO” “PE3” “GNO” “GPA”.
+* Parameters of the regional distribution (selected by ’Add_Goodness’). Obtained
+from ’Add_RegPar’. See example.
+
+## Value
+Cumulative probabilities for the sites forming the homogeneous region or group.
+
+## Examples
+data(dataset)
+data(parGEV)
+Add_RegProb(dataset,distr="GEV",bestPar=parGEV)
+
+## Function Add_RegSPEI()
+Calculates the regional SPEI.
+
+## Usage
+```r
+Add_RegSPEI(dataset)
+```
+## Arguments
+* RegProb The cumulative probabilities for the sites forming the homogeneous region or group. Calculated using the ’Add_RegProb’ function. See example.
+
+## Value
+The regional standardised precipitation evapotranspiration index
+using the additional regional frequency analysis as described in
+Martins et al. (2022) <doi:10.1590/1678-4499.20220061>.
+
+## Examples
+data(RegProb)
+RegSPEI=Add_RegSPEI(RegProb)

@@ -5,12 +5,11 @@
 #' The first column is the Years.
 #' The second column is the Months (from 1 to 12).
 #' The third column is the data coming from each site.
-#' See 'Dataset.csv' as example.
+#' Use data(dataset) as example.
 #' @return
 #' Hosking and Wallis' discordancy measure
 #' calculated using the additive approach as proposed in
-#' 'LOPES MARTINS et al. (2022)'
-#' https://doi.org/10.1590/1678-4499.20220061
+#' MARTINS et al. (2022) https://doi.org/10.1590/1678-4499.20220061
 #' @export
 #' @importFrom lmomRFA regsamlmu
 #' @importFrom rrcov   getDistance Cov

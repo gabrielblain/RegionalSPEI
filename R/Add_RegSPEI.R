@@ -3,7 +3,7 @@
 #' @param RegProb
 #' The cumulative probabilities for the sites forming
 #' the homogeneous region or group.
-#' Calculated using the 'Add_RegProb' function.
+#' RegProb is calculated using the 'Add_RegProb' function.
 #' @return
 #' The Regional SPEI
 #' @export

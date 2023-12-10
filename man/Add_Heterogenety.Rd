@@ -11,7 +11,7 @@ Add_Heterogenety(dataset, rho = 0, Ns = 100)
 The first column is the Years.
 The second column is the Months (from 1 to 12).
 The third column is the data coming from each site.
-See 'Dataset.csv' as example.}
+Use data(dataset) as example.}
 
 \item{rho}{Average spatial correlation (between 0 and 1).
 defauld is 0.}
@@ -20,12 +20,6 @@ defauld is 0.}
 Default is 100, but at least 500 is recommended.}
 }
 \value{
-'Hosking' and 'Wallis' Goodness of fit measure
-'Kjeldsen' and 'Prosdocimi's' bivariate extension
-calculated using the additive approach proposed in
-'LOPES MARTINS et al.' (2022)
-https://doi.org/10.1590/1678-4499.20220061
-
 'Hosking' and 'Wallis'' heterogeneity measure
 calculated using the additive approach proposed in
 'LOPES MARTINS et al. (2022)'

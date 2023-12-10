@@ -5,7 +5,7 @@
 #' The first column is the Years.
 #' The second column is the Months (from 1 to 12).
 #' The third column is the data coming from each site.
-#' See 'Dataset.csv' as example.
+#' Use data(dataset) as example.
 #' @param rho
 #' Average spatial correlation (between 0 and 1).
 #' defauld is 0.
@@ -13,11 +13,8 @@
 #' Number of simulated groups of series.
 #' Default is 100, but at least 500 is recommended.
 #' @return
-#' 'Hosking' and 'Wallis' Goodness of fit measure
-#' 'Kjeldsen' and 'Prosdocimi's' bivariate extension
-#'  calculated using the additive approach proposed in
-#' 'LOPES MARTINS et al.' (2022)
-#' https://doi.org/10.1590/1678-4499.20220061
+#' Hosking and Wallis (1991) Goodness of fit measure and
+#' its bivatriate extension proposed in Kjeldsen and Prosdocimi (2015).
 #' @export
 #' @importFrom lmomRFA regsamlmu
 #' @importFrom lmom pelwak pelgev pelglo pelpe3 pelgno pelgpa lmrgev lmrglo lmrpe3 lmrgno lmrgpa quawak
@@ -25,7 +22,7 @@
 #' @importFrom stats pnorm mahalanobis
 #' @examples
 #' data(dataset)
-#' Add_GoodnessFit(dataset,rho=0.8,Ns=100)
+#' Add_GoodnessFit(dataset,rho=0.5,Ns=100)
 
 Add_GoodnessFit <- function(dataset,rho=0,Ns=100){
   if (Ns<100){stop("Ns should be larger than 99.")}

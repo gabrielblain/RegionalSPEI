@@ -5,7 +5,7 @@
 #' The first column is the Years.
 #' The second column is the Months (from 1 to 12).
 #' The third column is the data coming from each site.
-#' See 'Dataset.csv' as example.
+#' Use data(dataset) as example.
 #' @param bestPar
 #' Parameters of the regional distribution (selected by 'Add_Goodness').
 #' Obtained from 'Add_RegPar'. See example.
@@ -21,7 +21,7 @@
 #' @examples
 #' data(dataset)
 #' data(parGEV)
-#' Add_RegProb(dataset,distr="PE3",bestPar=parGEV)
+#' Add_RegProb(dataset,distr="GEV",bestPar=parGEV)
 
 Add_RegProb=function(dataset,distr,bestPar){
   #if (!require(lmom)) install.packages('lmom')
