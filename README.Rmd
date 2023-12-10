@@ -7,8 +7,9 @@ The goal of RegionalSPEI is to calculate
 the standardised precipitation evapotranspiration index
 using the additional regional frequency analysis as described in
 Martins et al. (2022) <doi:10.1590/1678-4499.20220061>.
-The set of functions also calculate the discordance, heterogeneity and, goodness of fit measures. They also calculate the parameters of the regional distribution and
-the cumulative probabilities.
+The set of functions also calculate the discordance, heterogeneity and, 
+goodness of fit measures. They also calculate the parameters of 
+the regional distribution and the cumulative probabilities.
 
 ## Installation
 
