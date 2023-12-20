@@ -13,8 +13,11 @@ The second column is the Months (from 1 to 12).
 The third column is the data coming from each site.
 Use data(dataset) as example.}
 
-\item{rho}{Average spatial correlation (between 0 and 1).
-defauld is 0.}
+\item{rho}{A 1-column csv file or matrix
+with 12 monthly values for
+coefficients of spatial correlation.
+The first coefficient is for January.
+The last coefficient is for December.}
 
 \item{Ns}{Number of simulated groups of series.
 Default is 100, but at least 500 is recommended.}
@@ -28,5 +31,6 @@ Add_GoodnessFit
 }
 \examples{
 data(dataset)
-Add_GoodnessFit(dataset,rho=0.5,Ns=100)
+rho=as.matrix(rep(0.5,12))
+Add_GoodnessFit(dataset,rho=rho,Ns=100)
 }

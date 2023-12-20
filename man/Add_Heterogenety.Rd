@@ -4,7 +4,7 @@
 \alias{Add_Heterogenety}
 \title{Add_Heterogenety}
 \usage{
-Add_Heterogenety(dataset, rho = 0, Ns = 100)
+Add_Heterogenety(dataset, rho, Ns = 100)
 }
 \arguments{
 \item{dataset}{A csv file with data from each sites.
@@ -13,8 +13,11 @@ The second column is the Months (from 1 to 12).
 The third column is the data coming from each site.
 Use data(dataset) as example.}
 
-\item{rho}{Average spatial correlation (between 0 and 1).
-defauld is 0.}
+\item{rho}{A 1-column csv file or matrix
+with 12 monthly values for
+coefficients of spatial correlation.
+The first coefficient is for January.
+The last coefficient is for December.}
 
 \item{Ns}{Number of simulated groups of series.
 Default is 100, but at least 500 is recommended.}
@@ -30,5 +33,6 @@ Add_Heterogenety
 }
 \examples{
 data(dataset)
-Add_Heterogenety(dataset,rho = 0.5,Ns = 100)
+rho=as.matrix(rep(0.5,12))
+Add_Heterogenety(dataset,rho = rho,Ns = 100)
 }

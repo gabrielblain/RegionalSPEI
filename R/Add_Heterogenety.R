@@ -7,8 +7,11 @@
 #' The third column is the data coming from each site.
 #' Use data(dataset) as example.
 #' @param rho
-#' Average spatial correlation (between 0 and 1).
-#' defauld is 0.
+#' A 1-column csv file or matrix
+#' with 12 monthly values for
+#' coefficients of spatial correlation.
+#' The first coefficient is for January.
+#' The last coefficient is for December.
 #' @param Ns
 #' Number of simulated groups of series.
 #' Default is 100, but at least 500 is recommended.
@@ -24,21 +27,21 @@
 #' @importFrom stats pnorm sd
 #' @examples
 #' data(dataset)
-#' Add_Heterogenety(dataset,rho = 0.5,Ns = 100)
+#' rho=as.matrix(rep(0.5,12))
+#' Add_Heterogenety(dataset,rho = rho,Ns = 100)
 
-Add_Heterogenety <- function(dataset,rho = 0,Ns = 100){
+Add_Heterogenety <- function(dataset,rho,Ns = 100){
   if (Ns<100){stop("Ns should be larger than 99.")}
-  if (rho<0 || rho>1){stop("rho should Varies between 0 and 1.")}
-  #if (!require(lmomRFA)) install.packages('lmomRFA')
-  #if (!require(MASS)) install.packages('MASS')
-  #library(lmomRFA)
-  #library(MASS)
+  max.rho <- length(which(rho < 1))
+  min.rho <- length(which(rho > (-1)))
+  if (max.rho !=12 || min.rho !=12){stop("rho should largaer than -1 and smaller than 1.")}
   n.sites <- length(dataset[1,])-2
   if (n.sites<7){stop("The number of sites should be larger than 6.")}
   vetor.numerador <- matrix(NA,n.sites,1)
   V.sim <- matrix(NA,Ns,1)
   H.month <- matrix(NA,12,1)
   for (month in 1:12){
+    rho.month <- rho[month,1]
     dataset.month <- dataset[which(dataset[,2]==month),3:(n.sites+2)]
     index.flood <- colMeans(dataset.month,na.rm = TRUE)
     for (site in 1:n.sites){
@@ -61,7 +64,7 @@ Add_Heterogenety <- function(dataset,rho = 0,Ns = 100){
     V <- sqrt(sum(vetor.numerador)/weight)
     max.n.years <- max(x1.atoutset[,2])
     data.sim <- matrix(NA,max.n.years,n.sites)
-    sigma <- matrix(rho,n.sites,n.sites); diag(sigma) <- 1
+    sigma <- matrix(rho.month,n.sites,n.sites); diag(sigma) <- 1
     V.sim <- matrix(NA,Ns,1)
     for (ns in 1:Ns){
       u.sim <- pnorm(mvrnorm(n  =  max.n.years, mu = rep(0,n.sites), Sigma = sigma, tol  =  1e-06, empirical  =  FALSE))
