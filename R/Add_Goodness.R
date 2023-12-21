@@ -20,7 +20,7 @@
 #' its bivatriate extension proposed in Kjeldsen and Prosdocimi (2015).
 #' @export
 #' @importFrom lmomRFA regsamlmu
-#' @importFrom lmom pelwak pelgev pelglo pelpe3 pelgno pelgpa lmrgev lmrglo lmrpe3 lmrgno lmrgpa quawak
+#' @importFrom lmom pelwak pelkap pelgev pelglo pelpe3 pelgno pelgpa lmrgev lmrglo lmrpe3 lmrgno lmrgpa quakap quawak
 #' @importFrom MASS mvrnorm
 #' @importFrom stats pnorm mahalanobis
 #' @examples
@@ -71,15 +71,23 @@ Add_GoodnessFit <- function(dataset,rho=0,Ns=100){
     reg.t4 <- sum(vet.t4)/weight
     reg.t5 <- sum(vet.t5)/weight
     rmom <- c(0,reg.l2,reg.t3,reg.t4,reg.t5)
-    reg.par <- try(pelwak(rmom))
+    reg.par <- try(pelkap(rmom),TRUE)
+    is.kappa=length(reg.par)
+    if (is.kappa==1){reg.par=try(pelwak(rmom),TRUE)}
     max.n.years <- max(x1.atoutset[,2])
     data.sim <- matrix(NA,max.n.years,n.sites)
     sigma <- matrix(rho.month,n.sites,n.sites); diag(sigma) <- 1
     for (ns in 1:Ns){
       u.sim <- pnorm(mvrnorm(n = max.n.years, mu=rep(0,n.sites), Sigma=sigma, tol = 1e-06, empirical = FALSE))
       for (site in 1:n.sites){
-        data.sim[1:x1.atoutset[site,2],site] <- quawak(u.sim[1:x1.atoutset[site,2],site],
-                                                    c(reg.par[1],reg.par[2],reg.par[3],reg.par[4],reg.par[5]))}
+        if (is.kappa==1){
+          data.sim[1:x1.atoutset[site,2],site] <- quawak(u.sim[1:x1.atoutset[site,2],site],
+                                                         c(reg.par[1],reg.par[2],reg.par[3],reg.par[4],reg.par[5]))}else{
+                                                           data.sim[1:x1.atoutset[site,2],site] <- quakap(u.sim[1:x1.atoutset[site,2],site],
+                                                                                                          c(reg.par[1],reg.par[2],reg.par[3],reg.par[4]))}
+
+
+        }
       x1.sim <- regsamlmu(data.sim, lcv = FALSE)
       vet.l2.sim<- as.matrix(x1.atoutset[,2]*x1.sim[,4])
       vet.t3.sim<- as.matrix(x1.atoutset[,2]*x1.sim[,5])
