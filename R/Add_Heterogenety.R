@@ -22,7 +22,7 @@
 #' https://doi.org/10.1590/1678-4499.20220061
 #' @export
 #' @importFrom lmomRFA regsamlmu
-#' @importFrom lmom pelkap pelwak quakap quawak
+#' @importFrom lmom pelkap pelglo quakap quaglo
 #' @importFrom MASS mvrnorm
 #' @importFrom stats pnorm sd
 #' @examples
@@ -60,7 +60,7 @@ Add_Heterogenety <- function(dataset,rho,Ns = 100){
     rmom <- c(0,reg.l2,reg.t3,reg.t4,reg.t5)
     reg.par <- try(pelkap(rmom),TRUE)
     is.kappa=length(reg.par)
-    if (is.kappa==1){reg.par=try(pelwak(rmom),TRUE)}
+    if (is.kappa==1){reg.par=try(pelglo(rmom),TRUE)}
     for (v in 1:n.sites){
       vetor.numerador[v] <- x1.atoutset[v,2]*(x1.atoutset[v,4]-reg.l2)^2}
     V <- sqrt(sum(vetor.numerador)/weight)
@@ -72,8 +72,8 @@ Add_Heterogenety <- function(dataset,rho,Ns = 100){
       u.sim <- pnorm(mvrnorm(n  =  max.n.years, mu = rep(0,n.sites), Sigma = sigma, tol  =  1e-06, empirical  =  FALSE))
       for (site in 1:n.sites){
         if (is.kappa==1){
-        data.sim[1:x1.atoutset[site,2],site] <- quawak(u.sim[1:x1.atoutset[site,2],site],
-                                                    c(reg.par[1],reg.par[2],reg.par[3],reg.par[4],reg.par[5]))}else{
+        data.sim[1:x1.atoutset[site,2],site] <- quaglo(u.sim[1:x1.atoutset[site,2],site],
+                                                    c(reg.par[1],reg.par[2],reg.par[3]))}else{
         data.sim[1:x1.atoutset[site,2],site] <- quakap(u.sim[1:x1.atoutset[site,2],site],
                                                     c(reg.par[1],reg.par[2],reg.par[3],reg.par[4]))}
                              }
